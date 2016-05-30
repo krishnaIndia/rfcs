@@ -138,7 +138,7 @@ A gulp script must be integrated to fetch the error codes from the master branch
 
 All the existing NFS API has endpoint changes. The `isPathShared` variable and the
 `filePath` are swapped. New APIs for move/copy directory, metadata request are added.
-The detail documentation of the NFS API is updated in the [supporting document](./text/0036-launcher-api-v0.5.md/0036-nfs-api-v0.5.md)
+The detail documentation of the NFS API is updated in the [supporting document](./0036-nfs-api-v0.5.md)
 
 ### Streaming Support for API
 
