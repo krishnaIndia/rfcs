@@ -107,8 +107,8 @@ name and public name to be alphanumeric and can contain `-`.
 
 ### Using Single Client
 
-Launcher uses two clients for handling authorised and unauthorised requests. Launcher should use
-only one Client instance to do the network operations.
+Launcher uses two separate client instances for handling authorised and unauthorised requests.
+Launcher should use only one client instance to do the network related operations.
 
 The NFS API in safe_core must be modified to support this change. The NFS APIs, [uses the
 encryption keys](https://github.com/maidsafe/safe_core/blob/master/src/nfs/helper/directory_helper.rs#L159)
@@ -121,16 +121,16 @@ data is saved for public read.
 
 #### Launcher workflow for handling the FFI client handle
 
-When the launcher is started the unauthorised client is created. This will allow
+When the launcher is started, the unauthorised client is created. This will allow
 applications to read public data without the need of user logging in.
 Once the user logs in successfully, the unauthorised client handle must be dropped and
 the authorised client handle obtained should be used.
 
 ### Gulp script for updating error codes (npm run update-error-codes)
 
-FFI interface returns error codes for each call. The erros must be looked up based on the error code
-from the client modules (Core, NFS and DNS). A gulp script must be integrated to fetch the error codes
-from the master branch of the `safe_core` and build the [`error_code_lookup.js`](https://github.com/maidsafe/safe_launcher/blob/master/app/server/error_code_lookup.js) file.
+FFI interface returns error codes as return value for every method call. The errors must
+be looked up based on the error code from the client modules (Core, NFS and DNS).
+A gulp script must be integrated to fetch the error codes from the master branch of the `safe_core` and build the [`error_code_lookup.js`](https://github.com/maidsafe/safe_launcher/blob/master/app/server/error_code_lookup.js) file.
 
 ## New API Features
 
@@ -138,7 +138,7 @@ from the master branch of the `safe_core` and build the [`error_code_lookup.js`]
 
 All the existing NFS API has endpoint changes. The `isPathShared` variable and the
 `filePath` are swapped. New APIs for move/copy directory, metadata request are added.
-The detail documentation of the NFS API is updated in the [supporting document](/0036-nfs-api-v0.5.md)
+The detail documentation of the NFS API is updated in the [supporting document](./text/0036-launcher-api-v0.5.md/0036-nfs-api-v0.5.md)
 
 ### Streaming Support for API
 
