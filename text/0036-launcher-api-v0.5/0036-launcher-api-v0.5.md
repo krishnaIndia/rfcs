@@ -119,6 +119,24 @@ The FFI can decide whether to pass the keys or not based on the need for encrypt
 If the keys are passed, then the NFS API can use the keys to decrypt/encrypt, else the
 data is saved for public read.
 
+### CORS validation
+
+The CORS validation must be improved to validate XHR requests, based on the origin.
+Allow requests only if the `Origin` ends with `.safenet` extension.
+
+### CSP Headers
+
+Enforcing CSP headers on all requests from the launcher helps to mitigate security threats
+on the web clients.
+
+```
+Content-Security-Policy → default-src self *.safenet; object-src none; base-uri self; form-action http://api.safenet; frame-ancestors self;
+X-Frame-Options → SAMEORIGIN
+```
+
+`frame-ancestors` policy is supported only on chrome and firefox. Thus adding `X-Frame-Options` headers
+will act as a fallback for other browsers.
+
 #### Launcher workflow for handling the FFI client handle
 
 When the launcher is started, the unauthorised client is created. This will allow
