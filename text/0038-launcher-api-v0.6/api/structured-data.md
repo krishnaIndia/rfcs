@@ -3,7 +3,7 @@
 ## Create
 
 Structured data has a size restriction of 100KiB including all its internals.
-If the size is more than permitted size after serialisation, error is returned to the caller.
+If the size is more than permitted size after serialisation, error is returned.
 
 Versioned, Unversioned or custom Structured data types can be created.
 The Versioned and Unversioned structured data types will handle if the data size is
@@ -26,7 +26,7 @@ The data is be encrypted based on the Encryption enum value specified.
 |SYMMETRIC| Data is encrypted using symmetric key - only the user can read the data|
 |HYBRID| Data is encrypted using hybrid encryption for sharing the data secure|
 
-The hybrid encryption is detailed in the [safe_core low level api RFC]()
+The hybrid encryption is detailed in the [safe_core low level api RFC](https://github.com/maidsafe/rfcs/blob/master/text/0041-low-level-api/0041-low-level-api.md)
 
 The tag type and Id combination is needed for fetching the Structured Data from the network.
 
@@ -72,12 +72,13 @@ Binary Data
 
 #### Headers
 ```
-Handle-Id: u64 representing the Id for the DataIdentifier handle
+Handle-Id: u64 representing the DataIdentifier handle Id
 ```
 
 ## Get Data Identifier Handle
 
 Get the handle for structured data.
+Unauthorised access is allowed.
 
 ### Request
 
@@ -114,6 +115,7 @@ Handle-Id: base64 string representing the Id for the DataIdentifier handle
 ## Metadata
 
 Get the metadata of structured data using handle id
+Unauthorised access is allowed.
 
 ### Request
 
@@ -179,7 +181,8 @@ Versions-Length: Number
 
 ## Read Data
 
-- Reads data from SD. If versioned SD, the latest version is read by default
+Reads data from Structured Data. If it is a versioned Structured Data, the latest version is read by default
+unauthorised access is allowed.
 
 ### Request
 
@@ -215,7 +218,6 @@ Encryption: Enum // optional
 Versions-Length: Number
 Version-Number: Number // Version number of the SD currently being served
 Is-Owner: Boolean
-Handle-Id: base64 string representing the Id for the DataIdentifier handle
 ```
 
 #### Body
@@ -278,6 +280,8 @@ Authorization: Bearer <TOKEN>
 ```
 
 ## Drop Handle
+
+Unauthorised access is allowed
 
 ### Request
 

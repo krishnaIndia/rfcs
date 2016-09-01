@@ -2,11 +2,9 @@
 
 Appendable Data is explained in detail in the [RFC](https://github.com/maidsafe/rfcs/blob/master/text/0038-appendable-data/0038-appendable-data.md).  
 
-To perform any operation on the Appendable Data other than create, the handle for
-the Appendable Data is needed. The internals of appendable data is abstracted by
-safe_core and it returns only a Handle-Id with which the application can work with
-that appendable data. Since an handle is passed to the apps, the apps
-must be responsible for dropping the handle after its usage.
+Other than create, any operation on the Appendable Data would require the handle for
+the Appendable Data. Since a handle is passed to the application, the applications
+must drop the handle after its usage.
 
 ## Create
 Appendable data can be either public or private type.
@@ -68,7 +66,7 @@ Handle-Id: u64 number representing the appendable data handle id
 
 ## Get Data Identifier Handle
 
-Get the handle for appendable data.
+Get the handle for appendable data. Unauthorised access is allowed.
 
 ### Request
 
@@ -78,7 +76,6 @@ GET /appendable-data/handle/{Id}
 ```
 
 #### Headers
-
 ```
 Authorization: Bearer <TOKEN>
 ```
@@ -101,6 +98,7 @@ Handle-Id: u64 number representing the appendable data handle id
 ## Metadata
 
 Get the metadata of the appendable data including the size of data held.
+Unauthorised access is allowed.
 
 ### Request
 
@@ -133,6 +131,7 @@ Data-Length: Number
 ## Read Appendable Data
 
 Read data from appendable data at a specific index.
+Unauthorised access is allowed.
 
 ### Request
 
@@ -284,6 +283,7 @@ Authorization: Bearer <TOKEN>
 ```
 
 ## Drop Handle
+Unauthorised access is allowed.
 
 ### Request
 
